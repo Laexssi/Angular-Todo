@@ -48,6 +48,9 @@ export class TodoListComponent implements OnInit {
           isOutdate: data.deadline && (data.deadline.toDate().getTime() - new Date().getTime()) < 0
         }
         this.todos.push(todo);
+        this.todos.sort((a,b) => {
+          return b.createdDate.getTime() - a.createdDate.getTime()
+        })
         console.log(this.todos)
       })
     })
@@ -60,9 +63,7 @@ export class TodoListComponent implements OnInit {
       this.handleModalFormClose.bind(this)
     )
   }
-  clickDeleteTodo() {
-
-  }
+  
 
   handleModalFormClose(response) {
     if (typeof response === "object" && response !== null) {
@@ -87,11 +88,13 @@ export class TodoListComponent implements OnInit {
   }
 
   async handleDeleteDoneClick() {
-    for (const todo of this.todos) {
+    for await (const todo of this.todos) {
       if (todo.done) {
-       await this.todoService.deleteTodo(todo.id)
+       this.todoService.deleteTodo(todo.id)
+       .then(() => console.log("todo id" + todo.id + " todo idx " + this.todos.indexOf(todo)))
         .then(() => 
         this.todos.splice(this.todos.indexOf(todo), 1))
+        
         .catch(e => console.error(e))
       }
     }
