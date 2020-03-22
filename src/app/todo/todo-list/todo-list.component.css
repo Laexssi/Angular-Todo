@@ -1,0 +1,8 @@
+.done {
+    opacity: 0.4;
+}
+
+.outdate {
+    color: red;
+    font-weight: bold;
+}

@@ -1,0 +1,47 @@
+<div class="container-md col-12">
+    <div class="d-flex justify-content-between">
+    <h1 class="d-inline mt-5">AdCombo Test Task List</h1>
+    
+       
+    </div>
+    <div class="d-flex flex-row mb-3">
+        <button class="btn btn-primary mr-2" (click)="clickAddTodo()">Add new task</button>
+        <button class="btn btn-danger " (click)="handleDeleteDoneClick()">Delete done tasks</button>
+    </div>
+        <div class="d-flex flex-row mb-2" >
+            <button class="btn btn-outline-dark mr-3" (click)="currentPriority = 'All'">All</button>
+            <button class="btn btn-outline-info mr-3" (click)="currentPriority = 'Medium'">Medium</button>
+            <button class="btn btn-outline-success mr-3" (click)="currentPriority = 'High'">High</button>
+            <button class="btn btn-outline-warning mr-3" (click)="currentPriority = 'Very High'">Very High</button>
+        </div>
+    
+    
+    
+    <table class="table table-striped" *ngIf = "todos && todos.length > 0">
+        <thead>
+            <tr>
+                <th>Done</th>
+                <th>Due date</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Created Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let todo of todos, let index = index" >
+                <tr *ngIf="currentPriority === 'All' ? true : todo.priority === currentPriority" [ngClass] = "{'done': todo.done}">
+                    <td><input type="checkbox" [checked]="todo.done" (change)="checkedDone(index)"></td>
+                    <td [ngClass]="{'outdate': todo.isOutdate}">{{ todo.deadline ? (todo.deadline | date) : 'No date'  }}</td>
+                    <td [ngClass]="{'done': todo.done, 'not-done': !todo.done}">{{todo.title}}</td>
+                    <td>{{todo.description}}</td>
+                    <td>{{todo.priority}}</td>
+                    <td>{{todo.createdDate | date}}</td>
+                    <td class="d-flex flex-row"><button class="btn btn-sm btn-primary btn-edit mr-2"  type ="button"  (click)="handleEditClick(todo)">Edit</button>
+                    <button class="btn btn-sm btn-danger" type ="button" (click)="handleDeleteClick(todo.id, index)">Delete</button></td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
