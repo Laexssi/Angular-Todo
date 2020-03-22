@@ -6,7 +6,7 @@
     </div>
     <div class="d-flex flex-row mb-3">
         <button class="btn btn-primary mr-2" (click)="clickAddTodo()">Add new task</button>
-        <button class="btn btn-danger " (click)="handleDeleteDoneClick()">Delete done tasks</button>
+        <button class="btn btn-danger " (click)="handleDeleteDoneClick()">Delete completed tasks</button>
     </div>
         <div class="d-flex flex-row mb-2" >
             <button class="btn btn-outline-dark mr-3" (click)="currentPriority = 'All'">All</button>
@@ -17,8 +17,8 @@
     
     
     
-    <table class="table table-striped" *ngIf = "todos && todos.length > 0">
-        <thead>
+    <table class="table table-hover" *ngIf = "todos && todos.length > 0">
+        <thead class="thead-light">
             <tr>
                 <th>Done</th>
                 <th>Due date</th>
@@ -36,7 +36,12 @@
                     <td [ngClass]="{'outdate': todo.isOutdate}">{{ todo.deadline ? (todo.deadline | date) : 'No date'  }}</td>
                     <td [ngClass]="{'done': todo.done, 'not-done': !todo.done}">{{todo.title}}</td>
                     <td>{{todo.description}}</td>
-                    <td>{{todo.priority}}</td>
+                    <td><span class="badge badge-pill p-2" 
+                        [ngClass] = "{'badge-info': todo.priority === 'Medium',
+                                      'badge-success': todo.priority === 'High',
+                                       'badge-warning': todo.priority === 'Very High'}">
+                        {{todo.priority}}
+                    </span></td>
                     <td>{{todo.createdDate | date}}</td>
                     <td class="d-flex flex-row"><button class="btn btn-sm btn-primary btn-edit mr-2"  type ="button"  (click)="handleEditClick(todo)">Edit</button>
                     <button class="btn btn-sm btn-danger" type ="button" (click)="handleDeleteClick(todo.id, index)">Delete</button></td>

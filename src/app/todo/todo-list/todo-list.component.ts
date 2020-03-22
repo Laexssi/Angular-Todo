@@ -14,7 +14,7 @@ export class TodoListComponent implements OnInit {
   constructor(private modalService: NgbModal, private todoService: TodoService) { }
 
   todos: TodoViewModel[] = []
-  priorities: string[] = ["Medium", "High", "Very High"];
+  
   
   private _currentPriority: string = "All";
 
