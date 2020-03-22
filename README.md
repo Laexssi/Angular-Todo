@@ -1,3 +1,13 @@
+
+Ссылка на приложение https://todo-c43f3.firebaseapp.com/
+
+Ссылка на задание https://gist.github.com/Cobr3n/5cc5e0300e2f54f49aa0e9e1af72e3d0
+
+Все требования ТЗ выполнил. 
+Для хранения использовал Firebase database, отображение форм создания/редактирования реализовано на модальных страницах через класс NgbActiveModal из ng-bootstrap.
+
+
+
 # Todo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
